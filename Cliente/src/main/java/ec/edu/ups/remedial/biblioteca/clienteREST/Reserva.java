@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
 public class Reserva extends JFrame {
 
@@ -43,7 +44,7 @@ public class Reserva extends JFrame {
 	 */
 	public Reserva() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 479, 313);
+		setBounds(100, 100, 724, 484);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -77,6 +78,22 @@ public class Reserva extends JFrame {
 		estadoTXT.setColumns(10);
 		estadoTXT.setBounds(149, 177, 96, 19);
 		contentPane.add(estadoTXT);
+		
+		JLabel lblNewLabel = new JLabel("Codigo Libro");
+		lblNewLabel.setBounds(56, 57, 88, 13);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNombre = new JLabel("Nombre");
+		lblNombre.setBounds(56, 96, 68, 13);
+		contentPane.add(lblNombre);
+		
+		JLabel lblStock = new JLabel("Stock");
+		lblStock.setBounds(56, 136, 68, 13);
+		contentPane.add(lblStock);
+		
+		JLabel lblEstado = new JLabel("Estado");
+		lblEstado.setBounds(56, 180, 68, 13);
+		contentPane.add(lblEstado);
 	}
 	
 	void buscar() {
