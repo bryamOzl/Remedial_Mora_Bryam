@@ -9,7 +9,7 @@
 
 	<h:form>
 		<h1>Registro Libros</h1>
-	
+
 		<h:outputLabel value="Nombre" />
 		<h:inputText value="#{libroBEAN.libro.nombreLibro}">
 		</h:inputText>
@@ -21,6 +21,33 @@
 		<h:commandButton value="Crear" action="#{libroBEAN.registroLibro()}">
 		</h:commandButton>
 
+		<br></br>
+		<br></br>
+		
+		<h:outputLabel value="Autor Id" />
+		<h:inputText value="#{libroBEAN.autor.codigoAutor}">
+		</h:inputText>
+
+		<h:outputLabel value="Autor" />
+		<h:inputText value="#{libroBEAN.autor.nombre}">
+		</h:inputText>
+
+		<h:commandButton value="Buscar" action="#{libroBEAN.buscarAutor()}">
+		</h:commandButton>
+		
+		<br></br>
+		<br></br>
+		
+		<h:outputLabel value="Categoria Id" />
+		<h:inputText value="#{libroBEAN.categoria.codigoCategoria}">
+		</h:inputText>
+
+		<h:outputLabel value="Categoria" />
+		<h:inputText value="#{libroBEAN.categoria.categoria}">
+		</h:inputText>
+
+		<h:commandButton value="Buscar" action="#{libroBEAN.buscarCategoria()}">
+		</h:commandButton>
 
 	</h:form>
 

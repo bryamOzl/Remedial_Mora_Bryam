@@ -29,7 +29,6 @@ public class LibroBEAN {
 	public void registroLibro() throws SQLException {
 
 		try {
-			categoria.setCodigoCategoria(1);
 			libro.setCodigoLibro(daoLibro.contarLibro());
 			libro.setEstado("DISPONIBLE");
 			libro.setCategoria(categoria);
@@ -44,7 +43,6 @@ public class LibroBEAN {
 
 	public void registroLibAut() throws SQLException {
 		java.util.Date fecha = new Date();
-		autor.setCodigoAutor(1);
 		libaut.setCodigoLibaut(daoLibro.contarInter());
 		libaut.setFecha(fecha);
 		libaut.setLibro(libro);
@@ -52,6 +50,14 @@ public class LibroBEAN {
 		daoLibro.insertInter(libaut);
 		libaut = null;
 		System.out.println("LIBRO AUTOR GUARDADO");
+	}
+	
+	public void buscarAutor() throws SQLException {
+		autor = daoLibro.readAutor(autor.getCodigoAutor());
+	}
+	
+	public void buscarCategoria() throws SQLException {
+		categoria = daoLibro.readCategoria(categoria.getCodigoCategoria());
 	}
 
 	public Libro getLibro() {

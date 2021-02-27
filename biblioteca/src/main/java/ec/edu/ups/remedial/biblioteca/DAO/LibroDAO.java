@@ -11,7 +11,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import ec.edu.ups.donBosquito.modelo.Persona;
+
 import ec.edu.ups.remedial.biblioteca.modelo.Autor;
 import ec.edu.ups.remedial.biblioteca.modelo.Categoria;
 import ec.edu.ups.remedial.biblioteca.modelo.LibAut;
@@ -30,7 +30,7 @@ public class LibroDAO {
 		em.persist(libro);
 		return true;
 	}
-	
+
 	public boolean insertInter(LibAut libAut) throws SQLException {
 		em.persist(libAut);
 		return true;
@@ -55,7 +55,7 @@ public class LibroDAO {
 		}
 		return listarCategoria;
 	}
-	
+
 	public List<Autor> listarAutor() {
 		List<Autor> listarAutor = new ArrayList<>();
 		String sql = "SELECT * FROM Autor";
@@ -75,7 +75,7 @@ public class LibroDAO {
 		}
 		return listarAutor;
 	}
-	
+
 	public int contarLibro() throws SQLException {
 		int s;
 		String sql = "SELECT MAX (libro_id) FROM libro";
@@ -87,7 +87,7 @@ public class LibroDAO {
 		ps.close();
 		return s;
 	}
-	
+
 	public int contarInter() throws SQLException {
 		int s;
 		String sql = "SELECT MAX (libaut_id) FROM libaut";
@@ -99,14 +99,45 @@ public class LibroDAO {
 		ps.close();
 		return s;
 	}
-	
+
 	public Autor readAutor(int autor_id) throws SQLException {
 		Autor autor = em.find(Autor.class, autor_id);
 		return autor;
 	}
-	
+
 	public Categoria readCategoria(int categoria_id) throws SQLException {
 		Categoria categoria = em.find(Categoria.class, categoria_id);
 		return categoria;
+	}
+
+	public Libro readlibro(int libro_id) throws SQLException {
+		Libro libro = em.find(Libro.class, libro_id);
+		return libro;
+	}
+
+	public List<Libro> listarLibro(int categoria_id) {
+
+		List<Libro> listarLibro = new ArrayList<>();
+		String sql = "SELECT * FROM libro l WHERE l.categoria_id=?";
+
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, categoria_id);
+			ResultSet res = ps.executeQuery();
+			while (res.next()) {
+				Libro libro = new Libro();
+				libro.setCodigoLibro(res.getInt("libro_id"));
+				libro.setNombreLibro(res.getString("nombrelibro"));
+				libro.setEstado(res.getString("estado"));
+				libro.setStock(res.getInt("stock"));
+				libro.setCategoria(readCategoria(res.getInt("categoria_id")));
+				listarLibro.add(libro);
+			}
+			ps.execute();
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println("Erro al listar los Libros " + e.getMessage());
+		}
+		return listarLibro;
 	}
 }
